@@ -40,13 +40,9 @@ class BooksApp extends React.Component {
       const newState = currentState
       newState.books.push(book)
     }
+   
     ))
-    // const {value} = event.target.value
-    // this.setState()
-    // console.log(value, book.id)
-
-
-    // console.log(this.book.id)
+    this.myBooks()
   }
 
 
