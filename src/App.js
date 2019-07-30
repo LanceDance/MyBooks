@@ -2,7 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Books from './books/books.react'
-import bookshelf from './bookshelf/bookshelf.react'
+import Bookshelf from './bookshelf/bookshelf.react'
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -57,19 +57,21 @@ class BooksApp extends React.Component {
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
-            
+           
             </div>
-            <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                
+            
+
+                  <div className="bookshelf-books">
+                    <ol className="books-grid">
             <Books books={this.state.books}
             handleChange= {this.handleChange}/>
-            
+                          </ol>
           </div>
           </div>
-          
           </div>
           </div>
+
+
 
 
         

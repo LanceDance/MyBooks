@@ -1,8 +1,7 @@
 import React from 'react';
+import Books from '../books/books.react'
 
-
-
-class bookshelf extends React.Component {
+class Bookshelf extends React.Component {
 
     render() {
         return (
@@ -10,6 +9,7 @@ class bookshelf extends React.Component {
             <h2 className="bookshelf-title">Want to Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
+
               </ol>
               </div>
               </div>
@@ -17,4 +17,4 @@ class bookshelf extends React.Component {
     }
 }
 
-export default bookshelf;
+export default Bookshelf;
