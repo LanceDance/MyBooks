@@ -3,7 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Books from './books/books.react'
 import Bookshelf from './bookshelf/bookshelf.react'
-
+import Search from './books/search.react'
 class BooksApp extends React.Component {
   constructor(props) {
     super(props)
@@ -50,6 +50,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+
             <div className="search-books-results">
               <ol className="books-grid"></ol>
             </div>
@@ -59,18 +60,18 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
            
             </div>
-            
-
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
+            <Bookshelf/>
             <Books books={this.state.books}
             handleChange= {this.handleChange}/>
-                          </ol>
+           
+        
           </div>
           </div>
+          <div className="open-search">
+          <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+        </div>
           </div>
-          </div>
-
+   
 
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 class Books extends Component {
-
+    
     state = {
         query: ''
     }
@@ -22,36 +22,29 @@ class Books extends Component {
         
         const { query} = this.state
         const {books, handleChange} = this.props
+        const {booksWanToRead} = books.shelf === 'wantToRead'
     const showBooks = query  === ''
         ? books
         : books.filter((c) => (    
-            c.title.toLowerCase().includes(query.toLowerCase() )
+            c.title.toLowerCase().includes(query.toLowerCase() 
+            )
+        
         ))
-    function checkShelf() {
-        const shelf = []
-        for (let i = 0; i < query.length; i++) {
+    function checkShelf(books) {
+        
+        for (let i = 0; i < books.length; i++) {
             if (i.shelf === 'wantToRead') {
-                shelf.push(i)
+                books.push(i)
             }
         }
-        console.log(shelf)
-        return shelf
+        console.log(books)
+        return books
     }
         return (
-            <div className="search-books">
-            <div className="md-form mt-0">
-            <div className="search-books-input-wrapper">
-
-                <input type="text" placeholder="Search by title or author"
-                value={query}
-                onChange={(event) => this.updateQuery(event.target.value)}/>
-
-              </div>
-    {checkShelf}
+         
         <div className="book">
     {showBooks.map((book) =>  (
-        <li key={book.title}>
-        
+    <li key={book.title}>
             <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
             <div className="book-shelf-changer">
@@ -69,17 +62,12 @@ class Books extends Component {
     <div className="book-title">{book.title}</div>
     <div className="book-authors">{this.authorsArray(book)}</div>
 
-    
 
         </li>
     )
 
     )}
-    
-  {/* </ol> */}
-</div>
- </div>
- </div>
+    </div>
 );
 
 
