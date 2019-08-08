@@ -24,13 +24,6 @@ class BooksApp extends React.Component {
       }))
     })
   }
-  myBooks = () => {
-    BooksAPI.getAll().then((books) => {
-      this.setState(() => ({
-        books: books
-      }))
-    })
-  }
 
   handleChange(book, event) {
     console.log(event.target.value)
