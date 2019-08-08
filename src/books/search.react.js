@@ -21,15 +21,17 @@ class Search extends Component {
         onChange={(event) => this.updateQuery(event.target.value)}/>
 
 
-        <div className="search-books">
-        <div className="md-form mt-0">
-        <div className="search-books-input-wrapper">
-        
-            <input type="text" placeholder="Search by title or author"
-            value={query}
-            onChange={(event) => this.updateQuery(event.target.value)}/>
-
-          </div>
+          <div className="search-books">
+            <div className="md-form mt-0">
+            <div className="search-books-input-wrapper">
+            
+                <input type="text" placeholder="Search by title or author"
+                value={query}
+                onChange={(event) => this.updateQuery(event.target.value)}/>
+    </div>
+    </div>
+    </div>
+    </div>
 </div>
 </div>
 )

@@ -22,7 +22,7 @@ class Books extends Component {
         
         const { query} = this.state
         const {books, handleChange} = this.props
-        const {booksWanToRead} = books.shelf === 'wantToRead'
+        
     const showBooks = query  === ''
         ? books
         : books.filter((c) => (    
@@ -30,21 +30,21 @@ class Books extends Component {
             )
         
         ))
-    function checkShelf(books) {
-        
-        for (let i = 0; i < books.length; i++) {
-            if (i.shelf === 'wantToRead') {
-                books.push(i)
-            }
-        }
-        console.log(books)
-        return books
-    }
+
+    const booksRead = books.filter(book => book.shelf=== 'read')
+    const booksCurrentlyReading = books.filter(book => book.shelf=== 'currentlyReading')
+    const wantToRead = books.filter(book => book.shelf=== 'wantToRead')        
         return (
-         
+            <div className="bookshelf"> 
+            <h2 className="bookshelf-title">Books want to Read</h2>
+            <div className="bookshelf-books">
+            <ol className="books-grid">
         <div className="book">
-    {showBooks.map((book) =>  (
+    {wantToRead.map((book) =>  (
+        
     <li key={book.title}>
+
+            {console.log(booksRead)}
             <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
             <div className="book-shelf-changer">
@@ -53,7 +53,6 @@ class Books extends Component {
           <option value="currentlyReading">Currently Reading</option>
           <option value="wantToRead">Want to Read</option>
           <option value="read">Read</option>
-          <option value="none">None</option>
 
         </select>
 
@@ -68,6 +67,10 @@ class Books extends Component {
 
     )}
     </div>
+    </ol>
+    </div>
+    </div>
+
 );
 
 

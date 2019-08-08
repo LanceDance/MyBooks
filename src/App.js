@@ -60,9 +60,8 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
            
             </div>
-            <Bookshelf/>
             <Books books={this.state.books}
-            handleChange= {this.handleChange}/>
+              handleChange= {this.handleChange}/>
            
         
           </div>
