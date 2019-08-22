@@ -2,7 +2,8 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Books from './books/books.react'
-import bookshelf from './bookshelf/bookshelf.react'
+import Search from './books/search.react'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class BooksApp extends React.Component {
         books: books
       }))
     })
-  }
+}
 
   handleChange(book, event) {
     console.log(event.target.value)
@@ -40,13 +41,9 @@ class BooksApp extends React.Component {
       const newState = currentState
       newState.books.push(book)
     }
+   
     ))
-    // const {value} = event.target.value
-    // this.setState()
-    // console.log(value, book.id)
-
-
-    // console.log(this.book.id)
+    this.myBooks()
   }
 
 
@@ -54,26 +51,40 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+      <Router>
+      <Route
+					path="/search"
+					render={() => <Search books={this.state.books} handleChange={this.handleChange} />}
+/>
+
+        
             <div className="search-books-results">
               <ol className="books-grid"></ol>
             </div>
+      <Route exact path='/' render={() => (   
           <div className="list-books-content">
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
-            
+           
             </div>
-            <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                
             <Books books={this.state.books}
-            handleChange= {this.handleChange}/>
-            
+              handleChange= {this.handleChange}/>
+           
+        
           </div>
+          </div>
+          )}/>
+          <div className="open-search">
+          <Link to="/search">Add Book</Link>
+        </div>
+       
+        </Router>
+
           </div>
           
-          </div>
-          </div>
+          
+
 
 
         
@@ -81,4 +92,5 @@ class BooksApp extends React.Component {
   }
 }
 
-export default BooksApp
+export default BooksApp;
+
