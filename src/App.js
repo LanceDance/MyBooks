@@ -4,6 +4,8 @@ import './App.css'
 import Books from './books/books.react'
 import Bookshelf from './bookshelf/bookshelf.react'
 import Search from './books/search.react'
+import { Router, Route, Link,IndexRoute } from 'react-router'
+
 class BooksApp extends React.Component {
   constructor(props) {
     super(props)
@@ -42,11 +44,18 @@ class BooksApp extends React.Component {
   
   render() {
     return (
+      
       <div className="app">
+      <Route
+					path="/search"
+					render={() => <Search books={this.state.books} handleChange={this.handleChange} />}
+/>
 
+        
             <div className="search-books-results">
               <ol className="books-grid"></ol>
             </div>
+      <Route exact path='/' render={() => (   
           <div className="list-books-content">
           <div className="list-books">
             <div className="list-books-title">
@@ -59,11 +68,14 @@ class BooksApp extends React.Component {
         
           </div>
           </div>
+          )}/>
+
+          
           <div className="open-search">
-          <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+          <Link to="/search">Add Book</Link>
         </div>
           </div>
-   
+          
 
 
 
@@ -72,4 +84,5 @@ class BooksApp extends React.Component {
   }
 }
 
-export default BooksApp
+export default BooksApp;
+
