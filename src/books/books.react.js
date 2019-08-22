@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom'
 class Books extends Component {
     
     state = {
@@ -20,18 +19,8 @@ class Books extends Component {
     
     }
     render () {
-        
-        const { query} = this.state
         const {books, handleChange} = this.props
         
-    const showBooks = query  === ''
-        ? books
-        : books.filter((c) => (    
-            c.title.toLowerCase().includes(query.toLowerCase() 
-            )
-        
-        ))
-
     const booksRead = books.filter(book => book.shelf=== 'read')
     const booksCurrentlyReading = books.filter(book => book.shelf=== 'currentlyReading')
     const wantToRead = books.filter(book => book.shelf=== 'wantToRead')        

@@ -19,7 +19,8 @@ class Search extends Component {
     const showBooks = query  === ''
         ? books
         : books.filter((c) => (    
-            c.title.toLowerCase().includes(query.toLowerCase() )
+            c.title.toLowerCase().includes(query.toLowerCase()
+            )
         ))
         return (
             <div className="search-books">
@@ -30,15 +31,21 @@ class Search extends Component {
             <div className="md-form mt-0">
             <div className="search-books-input-wrapper">
 
-                <input type="text" placeholder="Search by title or author"
+                <input type="text" placeholder="Search by title"
                 value={query}
                 onChange={(event) => this.updateQuery(event.target.value)}/>
 
               </div>
               </div>
+              </div>
+              <div className="search-books-results">
+              <ol className="books-grid">
+
+        {console.log(showBooks)}
         <div className="book">
     {showBooks.map((book) =>  (
-        <li key={book.title}>
+
+        <li key={book.id} className='list-books-content'>
             <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
             <div className="book-shelf-changer">
@@ -65,7 +72,8 @@ class Search extends Component {
     
   {/* </ol> */}
 </div>
- </div>
+</ol>
+</div>
  </div>
 );
 
