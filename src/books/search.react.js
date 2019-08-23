@@ -1,27 +1,67 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {search} from '../BooksAPI'
+import Books from './books.react'
 
 class Search extends Component {
-
-    state = {
-        query: ''
-    }
-
+    constructor(props) {
+        super(props)
+        this.state = { 
+          query : "",
+          books: []
+        }}
     updateQuery = (query) => {
         this.setState(() =>({
         query: query.trim()
         }))
     }
 
+    authors = (book) => {
+        if (typeof book.authors === 'undefined') {
+            return 'No author'
+        }
+        else {
+        for (const value of book.authors.values())  {
+            const author = value
+            return author
+        }
+    }
+
+    
+    }
+
+    searchBook = async e => {
+        try {
+            const query = e.target.value
+            this.setState([query])
+
+            if (query.trim()) {
+                const results = await search(query)
+                console.log(results)
+                if (results.error) {
+                    this.setState({books: []})
+                } 
+                else {
+                    this.setState({books : results})
+                }
+            }
+            else {
+                this.setState({books: []})
+            }
+        
+    }
+        catch(error)
+        {console.log(error)}
+    }
     render () {
-        const { query} = this.state
-        const {books, handleChange} = this.props
-    const showBooks = query  === ''
-        ? books
-        : books.filter((c) => (    
-            c.title.toLowerCase().includes(query.toLowerCase()
-            )
-        ))
+        
+        const { handleChange} = this.props
+    // const showBooks = this.query  === ''
+    //     ? books
+    //     : books.filter((c) => (    
+    //         c.title.toLowerCase().includes(this.query.toLowerCase()
+    //         )
+    //     ))
         return (
             <div className="search-books">
             <div className="search-books-bar">
@@ -30,24 +70,21 @@ class Search extends Component {
             </Link>
             <div className="md-form mt-0">
             <div className="search-books-input-wrapper">
-
-                <input type="text" placeholder="Search by title"
-                value={query}
-                onChange={(event) => this.updateQuery(event.target.value)}/>
-
+                <input type="text" placeholder="Search by title or author" onChange={this.searchBook}/>
               </div>
               </div>
               </div>
+              {console.log(this.searchBook)}
               <div className="search-books-results">
               <ol className="books-grid">
 
-        {console.log(showBooks)}
-        <div className="book">
-    {showBooks.map((book) =>  (
+    {this.state.books.map((book) =>  (
 
         <li key={book.id} className='list-books-content'>
+        <div className="book">
+
             <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
+            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${typeof book.imageLinks=== 'undefined' ? ''  : book.imageLinks.smallThumbnail})` }}></div>
             <div className="book-shelf-changer">
         <select defaultValue={book.shelf} onChange={(e) => handleChange(book, e)}>
           <option value="move" disabled>Move to...</option>
@@ -61,20 +98,20 @@ class Search extends Component {
       </div>
     </div>
     <div className="book-title">{book.title}</div>
-    <div className="book-authors">{book.authors}</div>
+    <div className="book-authors">{this.authors(book)}</div>
 
     
+    </div>
 
         </li>
     )
 
     )}
-    
-  {/* </ol> */}
-</div>
+
+  
 </ol>
 </div>
- </div>
+</div>
 );
 
 
