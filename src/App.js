@@ -32,6 +32,14 @@ class BooksApp extends React.Component {
       }))
     })
 }
+searchBook = (book) => {
+  if (book === '') {
+    this.setState(() => ({
+      books : []
+    }))
+  }
+
+}
 
   handleChange(book, event) {
     console.log(event.target.value)
