@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {search} from '../BooksAPI'
-import Books from './books.react'
 
 class Search extends Component {
     constructor(props) {
@@ -37,9 +36,9 @@ class Search extends Component {
 
             if (query.trim()) {
                 const results = await search(query)
-                console.log(results)
                 if (results.error) {
                     this.setState({books: []})
+                
                 } 
                 else {
                     this.setState({books : results})
@@ -56,12 +55,7 @@ class Search extends Component {
     render () {
         
         const { handleChange} = this.props
-    // const showBooks = this.query  === ''
-    //     ? books
-    //     : books.filter((c) => (    
-    //         c.title.toLowerCase().includes(this.query.toLowerCase()
-    //         )
-    //     ))
+
         return (
             <div className="search-books">
             <div className="search-books-bar">
@@ -70,11 +64,10 @@ class Search extends Component {
             </Link>
             <div className="md-form mt-0">
             <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" onChange={this.searchBook}/>
+                <input type="text" placeholder="Search by title" onChange={this.searchBook}/>
               </div>
               </div>
               </div>
-              {console.log(this.searchBook)}
               <div className="search-books-results">
               <ol className="books-grid">
 
